@@ -1,8 +1,8 @@
-<!-- <script setup>
+<script setup>
 import { onMounted } from "vue";
 import useUnsplash from "@/composables/useUnsplash";
-
 import ImageCard from "./ImageCard.vue";
+import SkeletonCard from "./Skeleton-card.vue";
 
 const { images, loading, fetchImages } = useUnsplash();
 
@@ -10,100 +10,32 @@ onMounted(fetchImages);
 </script>
 
 <template>
-  <div v-if="loading">
-    <Loader />
-  </div>
-
-  <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    <ImageCard v-for="image in images" :key="image.id" :image="image" />
-  </div>
-</template>
-
-<style scoped>
-.grid {
-  column-gap: 10px;
-  row-gap: 10px;
-}
-</style> -->
-
-<template>
   <div class="gallery-container">
     <div class="gallery-grid">
-      <ImageCard
-        v-for="photo in photos"
-        :key="photo.id"
-        :photo="photo"
-        :class="['gallery-item', `gallery-item--${photo.size}`]"
-      />
+      <template v-if="loading">
+        <SkeletonCard
+          v-for="n in 6"
+          :key="n"
+          :class="['gallery-item', `gallery-item--medium`]"
+        />
+      </template>
+      <template v-else>
+        <ImageCard
+          v-for="photo in images"
+          :key="photo.id"
+          :photo="{
+            id: photo.id,
+            name: photo.user.name,
+            location: photo.user.location || 'Unknown Location',
+            image: photo.urls.regular,
+            size: 'medium',
+          }"
+          :class="['gallery-item', `gallery-item--medium`]"
+        />
+      </template>
     </div>
   </div>
 </template>
-
-<script>
-import ImageCard from "./ImageCard.vue";
-
-export default {
-  name: "ImageGallery",
-  components: {
-    ImageCard,
-  },
-  data() {
-    return {
-      photos: [
-        {
-          id: 1,
-          name: "Jordan Okeke",
-          location: "Pretoria, South Africa",
-          image: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fD
-            B8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80`,
-          size: "medium",
-        },
-        {
-          id: 2,
-          name: "Roland Olagbaye",
-          location: "London, United Kingdom",
-          image: `https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG9
-            0by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80`,
-          size: "large",
-        },
-        {
-          id: 3,
-          name: "Roland Olagbaye",
-          location: "London, United Kingdom",
-          image: `https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG9
-            0by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80`,
-          size: "medium",
-        },
-        {
-          id: 4,
-          name: "Jordan Okeke",
-          location: "Pretoria, South Africa",
-          image: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fD
-            B8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80`,
-          size: "medium",
-        },
-        {
-          id: 5,
-          name: "Jordan Okeke",
-          location: "Pretoria, South Africa",
-          image: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fD
-            B8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80`,
-          size: "large",
-        },
-        {
-          id: 6,
-          name: "Jordan Okeke",
-          location: "Pretoria, South Africa",
-          image: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fD
-            B8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80`,
-          size: "large",
-        },
-        // ... add the rest of your photos here
-      ],
-    };
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .gallery-container {

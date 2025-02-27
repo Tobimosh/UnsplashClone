@@ -36,13 +36,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-
     height: 250px;
     padding: 3rem 1rem;
   }
   .gallery-wrapper {
     max-width: 1000px;
-    margin: -80px auto 0 auto;
+    margin: -120px auto 0 auto;
+    padding: 3rem 1rem;
   }
 }
 </style>

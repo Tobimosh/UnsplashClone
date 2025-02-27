@@ -21,10 +21,6 @@
   </div>
 </template>
 
-<!-- <script setup>
-// Component logic here if needed
-</script> -->
-
 <style lang="scss" scoped>
 .search-bar-container {
   margin-bottom: 2rem;

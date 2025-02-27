@@ -1,6 +1,5 @@
 import { ref } from "vue";
-import axios from "axios"; 
-
+import axios from "axios";
 
 const useUnsplash = () => {
   const images = ref([]);
@@ -8,9 +7,9 @@ const useUnsplash = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get("https://api.unsplash.com/photos", {
+      const response = await axios.get("https://api.unsplash.com/photos?query=African", {
         headers: {
-          Authorization: `Client-ID ${process.env.ACCESS_TOKEN}`,
+          Authorization: `Client-ID F3txOxcuR0vXPVKkfoNVX_vLS0EKboMLBnvjQkhULUo`,
         },
       });
       images.value = response.data;

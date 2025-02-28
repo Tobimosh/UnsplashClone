@@ -1,3 +1,15 @@
+<script setup>
+import ref from "vue";
+import emit from "vue";
+const searchQuery = ref("");
+
+const emitSearch = () => {
+  if (searchQuery.value.trim() !== "") {
+    emit("search", searchQuery.value);
+  }
+};
+</script>
+
 <template>
   <div class="search-bar-container">
     <div class="search-bar">
@@ -16,7 +28,13 @@
           />
         </svg>
       </div>
-      <input type="text" class="search-input" placeholder="Search for photo" />
+      <input
+        type="text"
+        class="search-input"
+        v-model="searchQuery"
+        @keyup.enter="emitSearch"
+        placeholder="Search for photo"
+      />
     </div>
   </div>
 </template>

@@ -14,7 +14,7 @@ onMounted(fetchImages);
     <div class="gallery-grid">
       <template v-if="loading">
         <SkeletonCard
-          v-for="n in 6"
+          v-for="n in 5"
           :key="n"
           :class="['gallery-item', `gallery-item--medium`]"
         />
@@ -30,7 +30,7 @@ onMounted(fetchImages);
             image: photo.urls.regular,
             size: 'medium',
           }"
-          :class="['gallery-item', `gallery-item--medium`]"
+          :class="['gallery-item', `gallery-item--large`]"
         />
       </template>
     </div>
@@ -43,7 +43,7 @@ onMounted(fetchImages);
 
   .gallery-grid {
     display: grid;
-    gap: 1.5rem;
+    gap: 3rem;
 
     // Mobile layout
     grid-template-columns: 1fr;

@@ -1,7 +1,8 @@
 <script setup>
-import ref from "vue";
-import emit from "vue";
+import { ref, defineEmits } from "vue";
+
 const searchQuery = ref("");
+const emit = defineEmits(["search"]);
 
 const emitSearch = () => {
   if (searchQuery.value.trim() !== "") {
@@ -44,6 +45,7 @@ const emitSearch = () => {
   margin-bottom: 2rem;
   max-width: 1200px;
   width: 100%;
+  margin: 0 auto;
 
   .search-bar {
     position: relative;
@@ -51,7 +53,7 @@ const emitSearch = () => {
     width: 100%;
     background-color: white;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.05);
 
     .search-icon {
       position: absolute;
@@ -69,7 +71,7 @@ const emitSearch = () => {
 
     .search-input {
       width: 100%;
-      padding: 1rem 1rem 1rem 3rem;
+      padding: 1.5rem 1.5rem 1.5rem 3rem;
       background-color: white;
       border: none;
       border-radius: 0.5rem;

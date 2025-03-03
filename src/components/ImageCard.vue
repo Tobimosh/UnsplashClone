@@ -1,5 +1,5 @@
 <template>
-  <div class="photo-card">
+  <div class="photo-card" @click="$emit('click')">
     <img :src="photo.image" :alt="photo.name" class="photo-image" />
     <div class="gradient-overlay"></div>
     <div class="photo-content">
@@ -16,6 +16,7 @@ defineProps({
     required: true,
   },
 });
+defineEmits(["click"]);
 </script>
 
 <style lang="scss" scoped>

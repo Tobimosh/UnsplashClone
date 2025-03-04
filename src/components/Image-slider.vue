@@ -71,7 +71,7 @@ onUnmounted(() => {
 <template>
   <transition name="fade">
     <div v-if="show" class="slider-overlay" @click.self="close">
-      <div class="slider-container">
+      <div class="slider-container" @click.self="close">
         <button
           class="nav-button prev"
           @click="prev"
@@ -199,8 +199,12 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 1rem;
     animation: scaleIn 0.3s ease-out;
+
+    @media (min-width: 768px) {
+      padding: 0 2rem;
+    }
   }
 
   .slider-content {
@@ -276,13 +280,22 @@ onUnmounted(() => {
       opacity: 0.5;
       cursor: not-allowed;
     }
-
     &.prev {
-      left: 10rem;
+      left: 2rem;
     }
 
     &.next {
-      right: 10rem;
+      right: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      &.prev {
+        left: 10rem;
+      }
+
+      &.next {
+        right: 10rem;
+      }
     }
   }
 }

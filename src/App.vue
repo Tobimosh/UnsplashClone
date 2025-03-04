@@ -87,22 +87,65 @@ onMounted(() => fetchImages());
   .top-content {
     background-color: #dde3eb;
     width: 100%;
-    height: 250px;
-    padding: 3rem 1rem;
+    height: auto;
+    min-height: 220px;
+    padding: 2.5rem 1rem;
+    margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      min-height: 180px;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 480px) {
+      min-height: 150px;
+      padding: 1.5rem 0.75rem;
+    }
   }
 
   .gallery-wrapper {
     max-width: 1100px;
-    margin: -120px auto 0 auto;
-    padding: 3rem 1rem;
+    margin: -115px auto 0 auto;
+    padding: 2.5rem 1rem;
+
+    @media (max-width: 768px) {
+      margin-top: -100px;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 480px) {
+      margin-top: -90px;
+      padding: 1.5rem 0.75rem;
+    }
   }
 
   .search-status {
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 300;
     max-width: 1200px;
     margin: 0 auto;
     color: #22354b;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.3rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1.5rem;
+      }
+    }
 
     .searchWord {
       opacity: 50%;
@@ -120,9 +163,22 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+
+  @media (max-width: 768px) {
+    font-size: 15.5px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 15px;
+  }
 }
 </style>

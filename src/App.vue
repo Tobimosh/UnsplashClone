@@ -53,7 +53,7 @@ onMounted(() => fetchImages());
             <span class="searchWord">"{{ searchQuery }}"</span> ...
           </h1>
           <h1 v-else-if="searchState === 'success'">
-            Search results for
+            Search Results for
             <span class="searchWord">"{{ searchQuery }}"</span>
           </h1>
           <h1 v-else-if="searchState === 'error'">
@@ -99,14 +99,14 @@ onMounted(() => fetchImages());
 
   .search-status {
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 300;
     max-width: 1200px;
     margin: 0 auto;
-    color: #333;
-    text-transform: capitalize;
+    color: #22354b;
 
     .searchWord {
       opacity: 50%;
+      text-transform: capitalize;
     }
   }
 }
@@ -116,7 +116,7 @@ onMounted(() => fetchImages());
 body {
   margin: 0;
   padding: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

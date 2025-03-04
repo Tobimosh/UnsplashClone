@@ -56,10 +56,8 @@ defineEmits(["image-click"]);
     display: grid;
     gap: 3rem;
 
-    // Mobile layout
     grid-template-columns: 1fr;
 
-    // Tablet and Desktop layout
     @media (min-width: 768px) {
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(3, minmax(250px, auto));
@@ -73,7 +71,7 @@ defineEmits(["image-click"]);
 
         &-position-1 {
           grid-column: 2;
-          grid-row: 1;
+          grid-row: 1 / span 2;
         }
 
         &-position-2 {
@@ -105,8 +103,8 @@ defineEmits(["image-click"]);
 
       @media (min-width: 768px) {
         &--large {
-          // height: 100%;
-          // grid-row: span 2;
+          height: 100%;
+          grid-row: span 1;
           height: 450px;
         }
 

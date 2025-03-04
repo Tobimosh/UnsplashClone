@@ -112,7 +112,9 @@ onUnmounted(() => {
             </div>
             <div class="image-info">
               <h2>{{ currentImage.user.name }}</h2>
-              <p>{{ currentImage.user.location || "Unknown Location" }}</p>
+              <p>
+                {{ currentImage.user.location || "Unknown Location" }}
+              </p>
             </div>
           </div>
         </transition>
@@ -149,7 +151,6 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
-// Fade animation for the overlay
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
@@ -235,16 +236,16 @@ onUnmounted(() => {
       transition: transform 0.3s ease 0.1s, opacity 0.3s ease 0.1s;
 
       h2 {
-        font-size: 1.25rem;
+        font-size: 1rem;
         margin: 0;
-        font-weight: 500;
-        color: #333;
+        font-weight: 600;
+        color: #0a2b50;
       }
 
       p {
         margin: 0.5rem 0 0;
-        color: #666;
-        font-size: 0.875rem;
+        color: #6e88a1;
+        font-size: 0.9rem;
       }
     }
   }

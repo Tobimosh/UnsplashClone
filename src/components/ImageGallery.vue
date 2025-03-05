@@ -1,122 +1,144 @@
 <script setup>
-import ImageCard from "./ImageCard.vue";
+import { computed } from "vue";
+import ProfileGrid from "./ProfileGrid.vue";
 import SkeletonCard from "./Skeleton-card.vue";
 
-defineProps({
-  images: Array,
-  loading: Boolean,
+const props = defineProps({
+  images: {
+    type: Array,
+    required: true,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-defineEmits(["image-click"]);
+const emit = defineEmits(["image-click"]);
+
+const formattedProfiles = computed(() =>
+  props.images.map((image) => ({
+    name: image.user?.name || "Unknown",
+    location: image.user?.location || "Unknown location",
+    image: image.urls.regular,
+  }))
+);
+
+const handleProfileClick = (index) => {
+  emit("image-click", index);
+};
+
+const skeletonPlaceholders = computed(() => {
+  return Array.from({ length: props.images.length || 6 }, (_, index) => ({
+    class: getGridClass(index),
+  }));
+});
+
+const getGridClass = (index) => {
+  const position = index % 6;
+  return `grid-item-${position + 1}`;
+};
 </script>
 
 <template>
   <div class="gallery-container">
-    <div class="gallery-grid">
-      <template v-if="loading">
-        <SkeletonCard
-          v-for="n in 6"
-          :key="n"
-          :class="[
-            'gallery-item',
-            `gallery-item--${n === 2 ? 'large' : 'medium'}`,
-          ]"
-        />
-      </template>
-      <template v-else>
-        <ImageCard
-          v-for="(photo, index) in images"
-          :key="photo.id"
-          :photo="{
-            id: photo.id,
-            name: photo.user.name,
-            location: photo.user.location || 'Unknown Location',
-            image: photo.urls.regular,
-            size: index === 1 ? 'large' : 'medium',
-          }"
-          @click="$emit('image-click', index)"
-          :class="[
-            'gallery-item',
-            `gallery-item--${
-              index === 0 ? 'small' : index === 1 ? 'large' : 'medium'
-            }`,
-            `gallery-item-position-${index}`,
-          ]"
-        />
-      </template>
+    <div v-if="loading" class="gallery-grid">
+      <SkeletonCard
+        v-for="(skeleton, index) in skeletonPlaceholders"
+        :key="index"
+        :class="['gallery-item', skeleton.class]"
+      />
     </div>
+
+    <div v-else-if="images.length === 0" class="no-results">
+      <p>No images found. Try a different search term.</p>
+    </div>
+
+    <ProfileGrid
+      v-else
+      :profiles="formattedProfiles"
+      @profile-click="handleProfileClick"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .gallery-container {
-  margin-top: 2rem;
+  width: 100%;
 
   .gallery-grid {
     display: grid;
     gap: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(160px, auto);
+    justify-content: center;
 
-    grid-template-columns: 1fr;
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, minmax(250px, auto));
-      grid-auto-flow: dense;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-rows: auto;
+    }
+  }
 
-      .gallery-item {
-        &-position-0 {
-          grid-column: 1;
-          grid-row: 1;
-        }
+  .gallery-item {
+    width: 100%;
+    min-height: 300px;
+    border-radius: 10px;
+    background: #f3f3f3;
+    animation: pulse 1.5s infinite ease-in-out;
 
-        &-position-1 {
-          grid-column: 2;
-          grid-row: 1 / span 2;
-        }
+    &--large {
+      height: 450px;
+    }
 
-        &-position-2 {
-          grid-column: 3;
-          grid-row: 1;
-        }
+    &--medium {
+      height: 400px;
+    }
 
-        &-position-3 {
-          grid-column: 1;
-          grid-row: 2;
-        }
-
-        &-position-4 {
-          grid-column: 3;
-          grid-row: 1;
-        }
-
-        &-position-5 {
-          grid-column: 1;
-          grid-row: 2;
-        }
+    @media (max-width: 1024px) {
+      &--large,
+      &--medium {
+        height: auto; /* Allow flexibility */
       }
     }
 
-    .gallery-item {
-      width: 100%;
-      vertical-align: middle;
-      min-height: 300px;
-
-      @media (min-width: 768px) {
-        &--large {
-          height: 100%;
-          grid-row: span 1;
-          height: 450px;
-        }
-
-        &--medium {
-          height: 400px;
-        }
-
-        &--small {
-          height: 350px;
-        }
-      }
+    @media (max-width: 768px) {
+      min-height: 250px; /* Adjust for mobile */
     }
+  }
+
+  .grid-item-1 {
+    grid-row: span 2;
+  }
+
+  .grid-item-2 {
+    grid-row: span 3;
+  }
+
+  .grid-item-3 {
+    grid-row: span 2;
+  }
+
+  .grid-item-4 {
+    grid-row: span 2;
+  }
+
+  .grid-item-5 {
+    grid-row: span 3;
+  }
+
+  .grid-item-6 {
+    grid-row: span 2;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 50px 0;
+    font-size: 1.2rem;
+    color: #666;
   }
 }
 </style>

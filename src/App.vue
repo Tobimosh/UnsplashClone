@@ -105,16 +105,16 @@ onMounted(() => fetchImages());
 
   .gallery-wrapper {
     max-width: 1100px;
-    margin: -115px auto 0 auto;
+    margin: -100px auto 0 auto;
     padding: 2.5rem 1rem;
 
     @media (max-width: 768px) {
-      margin-top: -100px;
+      margin-top: -80px;
       padding: 2rem 1rem;
     }
 
     @media (max-width: 480px) {
-      margin-top: -90px;
+      margin-top: -70px;
       padding: 1.5rem 0.75rem;
     }
   }

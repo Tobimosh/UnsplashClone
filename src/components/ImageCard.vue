@@ -23,8 +23,13 @@ defineEmits(["click"]);
 .photo-card {
   position: relative;
   height: 100%;
+  min-height: 350px;
   border-radius: 0.5rem;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    min-height: 250px;
+  }
 
   &:hover {
     .photo-image {

@@ -14,7 +14,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["image-click"]);
+const emit = defineEmits(["image-click", "reset-search"]);
 
 const formattedProfiles = computed(() =>
   props.images.map((image) => ({
@@ -34,6 +34,10 @@ const skeletonPlaceholders = computed(() => {
   }));
 });
 
+const resetSearch = () => {
+  emit("reset-search");
+};
+
 const getGridClass = (index) => {
   const position = index % 6;
   return `grid-item-${position + 1}`;
@@ -51,7 +55,11 @@ const getGridClass = (index) => {
     </div>
 
     <div v-else-if="images.length === 0" class="no-results">
-      <p>No images found. Try a different search term.</p>
+      <p>
+        No images found.
+        <span class="try-again" @click="resetSearch">Try</span> a different
+        search term.
+      </p>
     </div>
 
     <ProfileGrid
@@ -139,6 +147,16 @@ const getGridClass = (index) => {
     padding: 50px 0;
     font-size: 1.2rem;
     color: #666;
+  }
+
+  .try-again {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #22354b;
+  }
+  .try-again:hover {
+    color: #22354b;
   }
 }
 </style>

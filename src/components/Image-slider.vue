@@ -191,12 +191,14 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  cursor: pointer;
   animation: fadeIn 0.1s ease-out;
 
   .slider-container {
     position: relative;
     display: flex;
     align-items: center;
+    // cursor: pointer;
     justify-content: center;
     width: 100%;
     padding: 0 1rem;
@@ -213,6 +215,7 @@ onUnmounted(() => {
     background-color: white;
     border-radius: 0.5rem;
     overflow: hidden;
+    cursor: default;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.5s ease-in;
 

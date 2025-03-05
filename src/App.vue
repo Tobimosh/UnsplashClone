@@ -36,7 +36,11 @@ const handleSearch = async (query) => {
     searchState.value = "error";
   }
 };
-
+const resetSearch = () => {
+  searchQuery.value = "";
+  searchState.value = "idle";
+  fetchImages(); // Fetch default images
+};
 onMounted(() => fetchImages());
 </script>
 
@@ -53,6 +57,26 @@ onMounted(() => fetchImages());
             <span class="searchWord">"{{ searchQuery }}"</span> ...
           </h1>
           <h1 v-else-if="searchState === 'success'">
+            <button @click="resetSearch" class="back">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="
+      M19 11H7.83
+      l4.88-4.88c.39-.39.39-1.03 0-1.42
+      a.996.996 0 0 0-1.41 0l-6.59 6.59
+      a.996.996 0 0 0 0 1.41l6.59 6.59
+      a.996.996 0 1 0 1.41-1.41L7.83 13H19
+      c.55 0 1-.45 1-1s-.45-1-1-1
+    "
+                />
+              </svg>
+            </button>
             Search Results for
             <span class="searchWord">"{{ searchQuery }}"</span>
           </h1>
@@ -66,6 +90,7 @@ onMounted(() => fetchImages());
         <ImageGallery
           :images="images"
           :loading="loading"
+          @reset-search="resetSearch"
           @image-click="handleImageClick"
         />
       </div>
@@ -136,6 +161,8 @@ onMounted(() => fetchImages());
 
     h1 {
       font-size: 3rem;
+      display: flex;
+      align-items: center;
       margin: 0;
 
       @media (max-width: 768px) {
@@ -179,6 +206,18 @@ html {
 
   @media (max-width: 480px) {
     font-size: 15px;
+  }
+
+  .back {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    margin-right: 1rem;
+    align-items: center;
   }
 }
 </style>

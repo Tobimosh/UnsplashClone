@@ -26,6 +26,7 @@ defineEmits(["click"]);
   min-height: 350px;
   border-radius: 0.5rem;
   overflow: hidden;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     min-height: 250px;
